@@ -12,9 +12,12 @@ import pyautogui
 
 imageplace = "/home/cin/Downloads/hqtrivia.htm.htm"
 preprocess = "thresh"
+def screenshot():
+    im=ImageGrab.grab()
+    im.show()
 
-# load the example image and convert it to grayscale
 def ocr(imageplace, preprocess):
+    #load example and convert to grayscale
     image = cv2.imread(imageplace)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
