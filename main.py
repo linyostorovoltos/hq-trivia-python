@@ -8,13 +8,20 @@ import cv2
 import os
 import pyautogui
 
-
-
-imageplace = "/home/cin/Downloads/hqtrivia.htm.htm"
 preprocess = "thresh"
+
 def screenshot():
     im=ImageGrab.grab()
-    im.show()
+    path="Screenshots/screenshot.png"
+    im.save(path)
+    return path
+
+def crop(image_path, saved_location):
+    img = Image.open(image_path)
+    w, h = img.size
+    img = img.crop((1280, 50, w, h-400))
+    img.save(saved_location)
+    
 
 def ocr(imageplace, preprocess):
     #load example and convert to grayscale
@@ -42,4 +49,7 @@ def ocr(imageplace, preprocess):
     os.remove(filename)
     return text
 
-print(ocr(imageplace, preprocess))
+cropsave = 'Screenshots/cropped.png'
+crop(screenshot(), cropsave)
+print(ocr(cropsave, 'blur'))
+
