@@ -3,10 +3,8 @@
 from PIL import Image
 import pyscreenshot as ImageGrab
 import pytesseract
-import argparse
 import cv2
 import os
-import pyautogui
 
 preprocess = "thresh"
 
