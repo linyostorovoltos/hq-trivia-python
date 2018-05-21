@@ -3,18 +3,26 @@
 from PIL import Image
 import pyscreenshot as ImageGrab
 import pytesseract
-import argparse
 import cv2
 import os
-import pyautogui
 
-
-
-imageplace = "/home/cin/Downloads/hqtrivia.htm.htm"
 preprocess = "thresh"
 
-# load the example image and convert it to grayscale
+def screenshot():
+    im=ImageGrab.grab()
+    path="Screenshots/screenshot.png"
+    im.save(path)
+    return path
+
+def crop(image_path, saved_location):
+    img = Image.open(image_path)
+    w, h = img.size
+    img = img.crop((1280, 50, w, h-400))
+    img.save(saved_location)
+    
+
 def ocr(imageplace, preprocess):
+    #load example and convert to grayscale
     image = cv2.imread(imageplace)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -39,4 +47,7 @@ def ocr(imageplace, preprocess):
     os.remove(filename)
     return text
 
-print(ocr(imageplace, preprocess))
+cropsave = 'Screenshots/cropped.png'
+crop(screenshot(), cropsave)
+print(ocr(cropsave, 'blur'))
+
