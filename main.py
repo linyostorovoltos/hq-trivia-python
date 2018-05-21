@@ -17,7 +17,7 @@ def screenshot():
 def crop(image_path, saved_location):
     img = Image.open(image_path)
     w, h = img.size
-    img = img.crop((1280, 50, w, h-400))
+    img = img.crop((1280, 400, w, h-400))
     img.save(saved_location)
     
 
@@ -47,7 +47,8 @@ def ocr(imageplace, preprocess):
     os.remove(filename)
     return text
 
-cropsave = 'Screenshots/cropped.png'
-crop(screenshot(), cropsave)
-print(ocr(cropsave, 'blur'))
+if __name__ == "__main__":
+    cropsave = 'Screenshots/cropped.png'
+    crop(screenshot(), cropsave)
+    print(ocr(cropsave, 'blur'))
 
